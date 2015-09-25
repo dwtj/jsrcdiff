@@ -12,3 +12,10 @@ The differences detected fall into one of six categories:
     ii. Deleting an initialization on a field where there was one.
     iii. Changing the initialization expression.
     iv. Changing a field's modifier (e.g. `private` to `public`).
+
+To build and install the project to the local Maven repository:
+
+```{.sh}
+$ mvn clean install
+```
+
