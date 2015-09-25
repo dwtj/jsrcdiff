@@ -13,6 +13,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <antlr4.version>4.5.1-1</antlr4.version>
   </properties>
 
   <build>
@@ -20,7 +21,7 @@
       <plugin>
         <groupId>org.antlr</groupId>
         <artifactId>antlr4-maven-plugin</artifactId>
-        <version>4.3</version>
+        <version>${antlr4.version}</version>
         <executions>
           <execution>
             <id>antlr</id>
@@ -37,7 +38,7 @@
     <dependency>
       <groupId>org.antlr</groupId>
       <artifactId>antlr4-runtime</artifactId>
-      <version>4.5.1-1</version>
+      <version>${antlr4.version}</version>
     </dependency>
 
     <dependency>
