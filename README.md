@@ -19,3 +19,8 @@ To build and install the project to the local Maven repository:
 $ mvn clean install
 ```
 
+To run the `Main` class:
+
+```{.sh}
+mvn exec:java
+```
