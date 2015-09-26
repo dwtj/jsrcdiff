@@ -50,6 +50,7 @@ public class Main
         return new String(bytes, Charset.defaultCharset());
     }
     
+    /*
     public static Interval diveForTestInterval(JavaParser parser)
     {
         return parser.compilationUnit()
@@ -109,4 +110,5 @@ public class Main
         }
         return keys;
     }
+    */
 }

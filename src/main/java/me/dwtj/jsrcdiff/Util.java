@@ -1,5 +1,6 @@
 package me.dwtj.jsrcdiff;
 
+
 public class Util
 {
     /**
@@ -26,6 +27,11 @@ public class Util
     
     public static class Pair<F,S>
     {
+        public static <F,S> Pair<F,S> make(F fst, S snd)
+        {
+            return new Pair<F, S>(fst, snd);
+        }
+
         public final F fst;
         public final S snd;
 
@@ -34,11 +40,33 @@ public class Util
             this.fst = fst;
             this.snd = snd;
         }
-
-        public static <F,S> Pair<F,S> make(F fst, S snd)
-        {
-            return new Pair<F, S>(fst, snd);
-        }
     }
     
+    /**
+     * An abstract class meant to be extended by key types which can represent themselves using a
+     * single `String`.
+     */
+    public static abstract class StringKey
+    {
+        protected String key;
+        
+        public StringKey() {
+            key = "";
+        }
+        
+        @Override
+        public int hashCode() {
+            return key.hashCode();
+        }
+        
+        @Override
+        public boolean equals(Object other) {
+            return key.equals(other);
+        }
+        
+        @Override
+        public String toString() {
+            return key;
+        } 
+    }
 }
