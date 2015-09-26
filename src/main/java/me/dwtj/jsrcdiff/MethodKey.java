@@ -47,14 +47,22 @@ public class MethodKey implements Comparable<MethodKey>
     }
 
     @Override
-    public int compareTo(MethodKey other)
-    {
+    public int compareTo(MethodKey other) {
         return key.compareTo(other.key);
+    }
+
+    @Override
+    public int hashCode() {
+        return key.hashCode();
     }
     
     @Override
-    public String toString()
-    {
+    public boolean equals(Object other) {
+        return key.equals(other);
+    }
+        
+    @Override
+    public String toString() {
         return key;
     }
     

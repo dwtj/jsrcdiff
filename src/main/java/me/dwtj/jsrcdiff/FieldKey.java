@@ -25,14 +25,22 @@ public class FieldKey implements Comparable<FieldKey>
     }
     
     @Override
-    public int compareTo(FieldKey other)
-    {
+    public int compareTo(FieldKey other) {
         return key.compareTo(other.key);
     }
     
     @Override
-    public String toString()
-    {
+    public int hashCode() {
+        return key.hashCode();
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+        return key.equals(other);
+    }
+    
+    @Override
+    public String toString() {
         return key;
     }
     
