@@ -1,7 +1,15 @@
 package me.dwtj.jsrcdiff;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
+import org.antlr.v4.runtime.misc.Interval;
 import org.stringtemplate.v4.ST;
 
 
@@ -79,6 +87,22 @@ public class Util
         public String toString() {
             return key;
         } 
+    }
+    
+    
+    public static String getSourceInterval(String src, TokenStream tokens, Interval interval)
+    {
+        Token start = tokens.get(interval.a);
+        Token end = tokens.get(interval.b);
+        return src.substring(start.getStartIndex(), end.getStopIndex() + 1);
+    }
+    
+
+    public static String fileToString(String file) throws IOException
+    {
+        Path path = Paths.get(file);
+        byte[] bytes = Files.readAllBytes(path);
+        return new String(bytes, Charset.defaultCharset());
     }
 
 
