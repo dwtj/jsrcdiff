@@ -16,6 +16,8 @@ import org.antlr.grammarsv4.JavaParser.MethodDeclarationContext;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.misc.Interval;
 
+import me.dwtj.jsrcdiff.Util.Pair;
+
 
 public class Main
 {
@@ -24,16 +26,24 @@ public class Main
         if (args.length != 2) {
             throw new IllegalArgumentException();
         }
-        String fileA = fileToString(args[0]);
-        String fileB = fileToString(args[1]);
+        
+        Pair<FieldMap,MethodMap> mapsA = getMapsFromFile(args[0]);
+        Pair<FieldMap,MethodMap> mapsB = getMapsFromFile(args[1]);
+    }
+    
+    public static Pair<FieldMap,MethodMap> getMapsFromFile(String filePath) throws IOException
+    {
+        String sourceCode = fileToString(filePath);
 
-        ANTLRInputStream input = new ANTLRInputStream(fileA);
+        ANTLRInputStream input = new ANTLRInputStream(sourceCode);
         JavaLexer lexer = new JavaLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         JavaParser parser = new JavaParser(tokens);
 
-        //diveToMakeAllFieldKeys(parser);
-        //diveToMakeAllMethodKeys(parser);
+        MapsBuilder mapsBuilder = new MapsBuilder();
+        mapsBuilder.build(parser);
+
+        return Pair.make(mapsBuilder.getFieldMap(), mapsBuilder.getMethodMap());
     }
     
     public static String getSourceInterval(String src, TokenStream tokens, Interval interval)

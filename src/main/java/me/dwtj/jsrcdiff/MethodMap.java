@@ -7,6 +7,7 @@ import java.util.TreeMap;
 import org.antlr.grammarsv4.JavaParser.FormalParameterContext;
 import org.antlr.grammarsv4.JavaParser.FormalParameterListContext;
 import org.antlr.grammarsv4.JavaParser.MethodDeclarationContext;
+import org.antlr.grammarsv4.JavaParser.ModifierContext;
 import org.antlr.grammarsv4.JavaParser.TypeContext;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -17,16 +18,17 @@ import me.dwtj.jsrcdiff.Util.StringKey;
 @SuppressWarnings("serial")
 public class MethodMap extends TreeMap<MethodMap.Key, MethodMap.Value>
 {
-    public void add(MethodDeclarationContext methodDecl)
+    public void add(List<ModifierContext> modifiers, MethodDeclarationContext methodDecl)
     {
-        Pair<Key,Value> entry = makeEntry(methodDecl);
+        Pair<Key,Value> entry = makeEntry(modifiers, methodDecl);
         put(entry.fst, entry.snd);
     }
     
-    protected Pair<Key,Value> makeEntry(MethodDeclarationContext methodDecl)
+    protected Pair<Key,Value> makeEntry(List<ModifierContext> modifiers,
+                                        MethodDeclarationContext methodDecl)
     {
         Key k = Key.make(methodDecl);
-        Value v = Value.make(methodDecl);
+        Value v = Value.make(modifiers, methodDecl);
         return Pair.make(k, v);
     }
     
@@ -84,24 +86,32 @@ public class MethodMap extends TreeMap<MethodMap.Key, MethodMap.Value>
     
     public static class Value
     {
-        public static Value make(MethodDeclarationContext methodDecl) {
-            return new Value(methodDecl);
+        private final List<ModifierContext> modifiers;
+        private final MethodDeclarationContext methodDecl;
+        
+        public static Value make(List<ModifierContext> modifiers,
+                                 MethodDeclarationContext methodDecl)
+        {
+            return new Value(modifiers, methodDecl);
         }
 
-        private final MethodDeclarationContext value;
-        
-        public Value(MethodDeclarationContext methodDecl)
+        public Value(List<ModifierContext> modifiers, MethodDeclarationContext methodDecl)
         {
+            if (modifiers == null) {
+                throw new IllegalArgumentException("`modifiers` can't be `null`.");
+            }
             if (methodDecl == null) {
                 throw new IllegalArgumentException("`methodDecl` can't be `null`.");
             }
-            value = methodDecl;
+
+            this.modifiers = modifiers;
+            this.methodDecl = methodDecl;
         }
         
         // TODO: Add getters for other properties of a method declaration (e.g. qualifiers).
 
         public String getId() {
-            return value.Identifier().getText();
+            return methodDecl.Identifier().getText();
         }
         
         public boolean equals(Object other)

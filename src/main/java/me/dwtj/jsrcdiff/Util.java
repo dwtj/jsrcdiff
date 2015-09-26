@@ -40,6 +40,11 @@ public class Util
             this.fst = fst;
             this.snd = snd;
         }
+        
+        @Override
+        public String toString() {
+            return "(" + fst.toString() + ", " + snd.toString() + ")";
+        }
     }
     
     /**
