@@ -14,10 +14,22 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <antlr4.version>4.5.1-1</antlr4.version>
+    <java.version>1.8</java.version>
   </properties>
 
   <build>
     <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+
       <plugin>
         <groupId>org.antlr</groupId>
         <artifactId>antlr4-maven-plugin</artifactId>
@@ -47,6 +59,7 @@
           <mainClass>me.dwtj.jsrcdiff.Main</mainClass>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
 
