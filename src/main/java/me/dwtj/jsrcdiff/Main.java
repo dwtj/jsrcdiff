@@ -5,14 +5,9 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.antlr.grammarsv4.JavaLexer;
 import org.antlr.grammarsv4.JavaParser;
-import org.antlr.grammarsv4.JavaParser.ClassBodyDeclarationContext;
-import org.antlr.grammarsv4.JavaParser.FieldDeclarationContext;
-import org.antlr.grammarsv4.JavaParser.MethodDeclarationContext;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.misc.Interval;
 

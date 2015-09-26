@@ -124,4 +124,11 @@ public class MethodMap extends TreeMap<MethodMap.Key, MethodMap.Value>
             return getId().equals(otherVal.getId());  // TODO: Add criteria for equality.
         }
     }
+    
+
+    @Override
+    public String toString()
+    {
+        return Util.toString(this);
+    }
 }

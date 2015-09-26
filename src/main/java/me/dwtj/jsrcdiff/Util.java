@@ -1,5 +1,9 @@
 package me.dwtj.jsrcdiff;
 
+import java.util.Map;
+
+import org.stringtemplate.v4.ST;
+
 
 public class Util
 {
@@ -24,7 +28,8 @@ public class Util
         }
         return Pair.make(typeStr, idStr); 
     }
-    
+
+
     public static class Pair<F,S>
     {
         public static <F,S> Pair<F,S> make(F fst, S snd)
@@ -46,7 +51,8 @@ public class Util
             return "(" + fst.toString() + ", " + snd.toString() + ")";
         }
     }
-    
+
+
     /**
      * An abstract class meant to be extended by key types which can represent themselves using a
      * single `String`.
@@ -73,5 +79,26 @@ public class Util
         public String toString() {
             return key;
         } 
+    }
+
+
+    private static final String STRING_TEMPLATE = String.join("\n",
+        "{",
+        "  <entries:{entry | <entry.key>: <entry.value>,\n}>",
+        "}"
+    );
+
+
+    public static <K,V> String toString(Map<K,V> map)
+    {
+        if (map.size() == 0) {
+            return "{}";
+        } else {
+            ST st = new ST(STRING_TEMPLATE);
+            for (Map.Entry<K,V> entry: map.entrySet()) {
+                st.addAggr("entries.{key,value}", entry.getKey(), entry.getValue());
+            }
+            return st.render();
+        }
     }
 }
