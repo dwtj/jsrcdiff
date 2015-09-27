@@ -58,6 +58,14 @@ public class Util
         public String toString() {
             return "(" + fst.toString() + ", " + snd.toString() + ")";
         }
+
+        public boolean equals(Object other) {
+            if (!(other instanceof Pair)) {
+                return false;
+            }
+            Pair o = (Pair) other;
+            return this.fst.equals(o.fst) && this.snd.equals(o.snd);
+        }
     }
 
 
