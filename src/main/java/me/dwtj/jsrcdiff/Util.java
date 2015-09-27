@@ -105,24 +105,46 @@ public class Util
         return new String(bytes, Charset.defaultCharset());
     }
 
+    /* NOTE:
+     * stringtemplate doesn't seem to be working, and I don't want to spend
+     * the time right now fucking around and figuring out why. This is the
+     * Error(s) I'm getting:
+     *
+     * [ERROR] /sanitized/path/jsrcdiff/Util.java:[128,19] method addAggr in class org.stringtemplate.v4.ST cannot be applied to given types;
+     * [ERROR] required: java.lang.String,java.lang.Object[]
+     * [ERROR] found: java.lang.String,K,V
+     * [ERROR] reason: actual and formal argument lists differ in length
+     *
+     * So for now I'm just doing this manually.
+
 
     private static final String STRING_TEMPLATE = String.join("\n",
         "{",
         "  <entries:{entry | <entry.key>: <entry.value>,\n}>",
         "}"
     );
-
+     */
 
     public static <K,V> String toString(Map<K,V> map)
     {
         if (map.size() == 0) {
             return "{}";
         } else {
+            /* See: above NOTE
+
             ST st = new ST(STRING_TEMPLATE);
             for (Map.Entry<K,V> entry: map.entrySet()) {
                 st.addAggr("entries.{key,value}", entry.getKey(), entry.getValue());
             }
             return st.render();
+            */
+            String s = new String("{ <entries:{\n");
+            for (Map.Entry<K,V> entry: map.entrySet()) {
+                s += "entry | " + entry.getKey() + ": " + entry.getValue() +
+                        ",\n";
+            }
+            s += "}>}";
+            return s;
         }
     }
 }
