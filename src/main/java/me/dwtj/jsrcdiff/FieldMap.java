@@ -69,7 +69,7 @@ public class FieldMap extends TreeMap<FieldMap.Key, FieldMap.Value>
     }
     
 
-    public static class Value
+    public static class Value implements Comparable<Value>
     {
         private final List<ModifierContext> modifiers;
         private final VariableDeclaratorContext varDecl;
@@ -109,23 +109,20 @@ public class FieldMap extends TreeMap<FieldMap.Key, FieldMap.Value>
         	}
         	return s;
         }
-        
-        // TODO
-        public boolean equals(Object other)
-        {
-            if (!(other instanceof Value)) {
-                return false;
-            }
-            
-            Value otherVal = (Value) other;
-            return getId().equals(otherVal.getId());  // TODO: Add criteria for equality.
-        }
 
         // a field value string is: qualifiers + initializers
 		@Override
 		public String toString()
 		{
 			return getQualifiers() + getInitializer();
+		}
+
+		// we compare the qualifiers and the initializers
+		@Override
+		public int compareTo(Value other) {
+			String s1 = this.getQualifiers() + "\n" + this.getInitializer();
+			String s2 = other.getQualifiers() + "\n" + other.getInitializer();
+			return s1.compareTo(s2);
 		}
     }
 

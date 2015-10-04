@@ -85,7 +85,7 @@ public class MethodMap extends TreeMap<MethodMap.Key, MethodMap.Value>
     }
 
     
-    public static class Value
+    public static class Value implements Comparable<Value>
     {
         private final List<ModifierContext> modifiers;
         private final MethodDeclarationContext methodDecl;
@@ -109,8 +109,6 @@ public class MethodMap extends TreeMap<MethodMap.Key, MethodMap.Value>
             this.methodDecl = methodDecl;
         }
         
-        // TODO: Add getters for other properties of a method declaration (e.g. qualifiers).
-
         public String getId() {
             return methodDecl.Identifier().getText();
         }
@@ -138,20 +136,20 @@ public class MethodMap extends TreeMap<MethodMap.Key, MethodMap.Value>
         }
         
         // return the full method body
-        // XXX this is wrong
         public String getBody() {
-        	return methodDecl.getText();
+        	return methodDecl.methodBody().getText();
         }
-        
-        public boolean equals(Object other)
-        {
-            if (!(other instanceof Value)) {
-                return false;
-            }
-            
-            Value otherVal = (Value) other;
-            return getId().equals(otherVal.getId());  // TODO: Add criteria for equality.
-        }
+
+		@Override
+		public String toString()
+		{
+			return getArgIds() + "\n" + getQualifiers() + "\n" + getBody();
+		}
+
+		@Override
+		public int compareTo(Value other) {
+			return getBody().compareTo(other.getBody());
+		}
     }
     
 

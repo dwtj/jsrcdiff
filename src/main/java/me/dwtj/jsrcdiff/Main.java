@@ -20,47 +20,20 @@ public class Main
         
         Pair<FieldMap,MethodMap> mapsA = getMapsFromFile(args[0]);
         Pair<FieldMap,MethodMap> mapsB = getMapsFromFile(args[1]);
-
-        System.out.println("\nmapsA Method keys:");
+        
+        // Comparing field maps
+        for (FieldMap.Key k: mapsA.fst.keySet()) {
+        	System.out.println(k);
+        	System.out.println(mapsB.fst.keySet().contains(k));
+        	System.out.println(mapsA.fst.get(k).compareTo(mapsB.fst.get(k)));
+        }
+        
+        // Comparing method maps
         for (MethodMap.Key k: mapsA.snd.keySet()) {
         	System.out.println(k);
+        	System.out.println(mapsB.snd.keySet().contains(k));
+        	System.out.println(mapsA.snd.get(k).compareTo(mapsB.snd.get(k)));
         }
-
-        System.out.println("\nmapsA Method IDs:");
-        for (MethodMap.Value v: mapsA.snd.values()) {
-        	System.out.println(v.getId());
-        }
-
-        System.out.println("\nmapsA Method qualifiers:");
-        for (MethodMap.Value v: mapsA.snd.values()) {
-        	System.out.println(v.getQualifiers());
-        }
-
-        System.out.println("\nmapsA Method arg IDs:");
-        for (MethodMap.Value v: mapsA.snd.values()) {
-        	//System.out.println(v.getArgIds());
-        	System.out.println(v.getArgIds());
-        }
-        
-        System.out.println("\nmapsA Method body:");
-        for (MethodMap.Value v: mapsA.snd.values()) {
-        	System.out.println(v.getBody());
-        }
-
-        /*
-        System.out.println("\nmapsA Field keys:\n");
-        for (FieldMap.Key k: mapsA.fst.keySet()) {
-            System.out.println(k);
-        }
-
-        System.out.println("\nmapsA Field values:\n");
-        for (FieldMap.Value v: mapsA.fst.values()) {
-            System.out.println(v);
-        }
-        
-        System.out.println("\nfill mapsA:\n");
-        System.out.println(mapsA);
-        */
     }
     
     public static Pair<FieldMap,MethodMap> getMapsFromFile(String filePath) throws IOException
