@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 import org.antlr.grammarsv4.JavaParser.FormalParameterContext;
 import org.antlr.grammarsv4.JavaParser.FormalParameterListContext;
+import org.antlr.grammarsv4.JavaParser.FormalParametersContext;
 import org.antlr.grammarsv4.JavaParser.MethodDeclarationContext;
 import org.antlr.grammarsv4.JavaParser.ModifierContext;
 import org.antlr.grammarsv4.JavaParser.TypeContext;
@@ -112,6 +113,34 @@ public class MethodMap extends TreeMap<MethodMap.Key, MethodMap.Value>
 
         public String getId() {
             return methodDecl.Identifier().getText();
+        }
+        
+        // return a concatenated string of argument Ids, empty string if no args
+        public String getArgIds() {
+        	if (methodDecl.formalParameters().formalParameterList() == null) {
+        		return "";
+        	}
+        	
+        	String s = new String();
+        	for (FormalParameterContext f: methodDecl.formalParameters().formalParameterList().formalParameter()) {
+        		s += f.variableDeclaratorId().getText() + " ";
+        	}
+        	return s;
+        }
+        
+        // return a concatenated string of qualifiers, space-delimited
+        public String getQualifiers() {
+        	String s = new String();
+        	for (ModifierContext m: modifiers) {
+        		s += m.getText() + " ";
+        	}
+        	return s;
+        }
+        
+        // return the full method body
+        // XXX this is wrong
+        public String getBody() {
+        	return methodDecl.getText();
         }
         
         public boolean equals(Object other)

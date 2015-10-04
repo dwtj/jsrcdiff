@@ -87,12 +87,30 @@ public class FieldMap extends TreeMap<FieldMap.Key, FieldMap.Value>
             this.varDecl = varDecl;
         }
         
-        // TODO: Add getter for other properties of a field declaration (e.g. qualifiers).
-        
+        // id AKA variables name
         public String getId() {
             return varDecl.variableDeclaratorId().Identifier().getText();
         }
         
+        // return an empty string if there's no initializer, otherwise concatenated
+        // initializers with delimiting spaces stripped out
+        public String getInitializer() {
+        	if (varDecl.variableInitializer() == null) {
+        		return "";
+        	}
+        	return varDecl.variableInitializer().getText();
+        }
+        
+        // return a string of concatenated qualifiers, delimited by spaces
+        public String getQualifiers() {
+        	String s = new String();
+        	for (ModifierContext m: modifiers) {
+        		s += m.getText() + " ";
+        	}
+        	return s;
+        }
+        
+        // TODO
         public boolean equals(Object other)
         {
             if (!(other instanceof Value)) {
@@ -102,6 +120,13 @@ public class FieldMap extends TreeMap<FieldMap.Key, FieldMap.Value>
             Value otherVal = (Value) other;
             return getId().equals(otherVal.getId());  // TODO: Add criteria for equality.
         }
+
+        // a field value string is: qualifiers + initializers
+		@Override
+		public String toString()
+		{
+			return getQualifiers() + getInitializer();
+		}
     }
 
     @Override
