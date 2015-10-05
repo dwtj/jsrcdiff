@@ -30,7 +30,6 @@ public class Main
     
     public static String pairDiff(Pair<FieldMap,MethodMap> a, Pair<FieldMap,MethodMap> b) {
     	
-    	
     	String ret = new String();
     	
     	/*
