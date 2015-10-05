@@ -12,6 +12,8 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.misc.Interval;
 import org.stringtemplate.v4.ST;
 
+import me.dwtj.jsrcdiff.MethodMap.Key;
+
 
 public class Util
 {
@@ -88,7 +90,11 @@ public class Util
         
         @Override
         public boolean equals(Object other) {
-            return key.equals(other);
+        	if (!(other instanceof StringKey)) {
+        		return false;
+        	}
+        	StringKey o = (StringKey) other;
+            return this.key.equals(o.key);
         }
         
         @Override
