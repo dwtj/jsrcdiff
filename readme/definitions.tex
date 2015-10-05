@@ -1,0 +1,56 @@
+\chapter{Definitions}
+
+We define a key and a value type for Java fields and methods. The key is
+used to index a particular object, and the value is used to check for
+equality. We define field and method keys and values here explicitly, as these
+definitions directly influence program behavior and output.
+
+\section{Fields}
+
+\subsection{Key}
+
+We define a field key to be:
+
+\begin{itemize}
+    \item the field type
+    \item the field identifier (e.g. variable name)
+\end{itemize}
+
+\subsection{Value}
+
+We deine a field value to be:
+
+\begin{itemize}
+    \item the field qualifiers (e.g. "public", "static", "final")
+    \item the field initializers
+\end{itemize}
+
+\section{Methods}
+
+\subsection{Key}
+
+We define a method key as:
+
+\begin{itemize}
+    \item the method return type
+    \item the method ID (i.e. method name)
+    \item an ordered listed of the method argument types (e.g. "int, String, double")
+\end{itemize}
+
+\subsection{Value}
+
+We define a method value as:
+
+\begin{itemize}
+    \item an ordered list of the method's argument IDs
+    \item the method's qualifiers (e.g. "public")
+    \item the text of the method body
+\end{itemize}
+
+Note in particular that we define the method value to include the \textit{entire}
+method body; this implies that two methods with, for instance, one extra
+space will be recognized as different. We do not do a semantic comparison of
+method bodies. Further note that although we specify a more granular
+definition of a method value, the assignment only calls for direct comparisons
+of method bodies. Therefore, when testing for method equality, all value fields
+are ignored except for the text of the method body.

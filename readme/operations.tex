@@ -1,0 +1,97 @@
+\chapter{Operations}
+
+\section{Overview}
+
+We now explicitly define our interpretation of the detected operations on fields
+and methods in terms the field and method key/value definitions. Class 1 and
+class 2 refer to the two Java input files.
+
+\section{Output Format}
+
+The output format for a particular operation is:\\
+
+\begin{lstlisting}[frame=single]
+$OP: $key$NL
+\end{lstlisting}
+
+
+Where ``\$OP'' is one of the operations listed below, ``\$key'' is either
+a method key or a field key, and ``\$NL'' is the newline character (ASCII value
+0xA). The full program output is a series of outputs for each particular
+operation.
+
+\section{Operation Outputs}
+
+\subsection{No Change}
+
+If a field or method remains unchanged, there is no output.
+
+\subsection{AM: Add a new method}
+
+We mark a method as \textbf{AM} when the method key is present in class 1,
+but the method key is not present in class 2.
+
+\subsection{DM: Delete a method}
+
+We mark a method as \textbf{DM} when the method key is present in class 1, but
+the method key is not present in class 2.
+
+\subsection{CM: Change the body of a method}
+
+We mark a method as \textbf{CM} if the method key is present in both class 1
+and class 2, but the text body of a method has changed.
+Note that this comparison is done with a simple string comparison.
+
+\subsection{AF: Add a field}
+
+We mark a field as \textbf{AF} if the field key is not present in class 1,
+but the field key is present in class 2.
+
+\subsection{DF: Delete a field}
+
+We mark a field as \textbf{DF} if the field key is present in class 1, but the
+field key is not present in class 2.
+
+\subsection{CFI: Change field initializer}
+
+We mark a field as \textbf{CFI} if the field key is present in both class 1
+and class 2, but the field value has changed.
+
+\section{Sample Output}
+
+See Figure \ref{figure:sample-output} for a sample jsrcdiff output, and
+see Appendix \ref{appendix:input-files} for the two input files used to
+produce this output.
+
+\begin{figure}
+\centering
+\begin{lstlisting}[frame=single]
+CM: void method0()
+CM: void method1()
+DM: String method4(int, double)
+DM: double method5(String)
+DM: double method6(Map<String,String>)
+DM: int method2(int)
+DM: int method3(int)
+AM: String method4(int, double, String)
+AM: double method2(int)
+AM: double method5(Map<String,String>)
+AM: double method7(String)
+AM: int method3(double)
+CFI: int i
+CFI: int[] intArr1
+CFI: String stringDoubleArr
+CFI: String s
+CFI: int x
+DF: HashMap<String,String> map0
+DF: int intArr2
+DF: int intDeepArr2
+DF: int[][][][][][] intDeepArr1
+AF: HashMap<String,String> mapXXX
+AF: double intDeepArr2
+AF: int intArr3
+AF: int[][][][][][][] intDeepArr1
+\end{lstlisting}
+\caption{A sample jsrcdiff output}
+\label{figure:sample-output}
+\end{figure}

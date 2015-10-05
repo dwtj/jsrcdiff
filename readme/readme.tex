@@ -1,0 +1,35 @@
+% LaTeX Template for Project Report, Version 2.0
+%
+% Released under Creative Commons Attribution license (CC-BY)
+% Info: http://creativecommons.org/licenses/by/3.0/
+%
+% Created by: Kartik Singhal
+% BTech CSE Batch of 2009-13
+% NIT Calicut
+% Contact Info: kartiksinghal@gmail.com
+
+\documentclass[12pt,a4paper]{report}
+\usepackage[pdftex]{graphicx}
+\usepackage{url}
+\usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={}, pdfauthor={}, pdfsubject={}, pdfkeywords={}]{hyperref}
+\usepackage[toc]{appendix}
+\usepackage{listings}
+
+\renewcommand{\chaptername}{Section}
+
+\begin{document}
+
+\input{./title.tex}
+
+\pagenumbering{roman} %numbering before main content starts
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic} %reset numbering to normal for the main content
+
+\input{./instructions.tex}
+\input{./definitions.tex}
+\input{./operations.tex}
+\input{./appendix.tex}
+
+\end{document}

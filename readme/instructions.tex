@@ -1,0 +1,30 @@
+\chapter{Instructions}
+
+\section{Building jsrcdiff}
+
+To build and install the project to the local Maven repository, run the
+following from the directory containing the ``pom.xml'' file:\\
+
+\begin{lstlisting}[language=bash,frame=single,showstringspaces=false]
+$ mvn clean install
+\end{lstlisting}
+
+
+\section{Running jsrcdiff}
+
+To run the Main class on two Java source code input files, run the following
+command from the directory containing the ``pom.xml'' file:\\
+
+\begin{lstlisting}[frame=single,breaklines=true,showstringspaces=false]
+$ mvn exec:java --quiet -Dexec.args="path/to/file/one.java path/to/file/two.java"
+\end{lstlisting}
+
+\section{Running Our Tests}
+
+To run our test input files, run the project as a JUnit test. The test input
+files we used during development can be found in the following
+project directory:\\
+
+\begin{lstlisting}[frame=single,breaklines=true,showstringspaces=false]
+src/test/jsrcdiff/
+\end{lstlisting}
