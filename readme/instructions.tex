@@ -21,10 +21,11 @@ $ mvn exec:java --quiet -Dexec.args="path/to/file/one.java path/to/file/two.java
 
 \section{Running Our Tests}
 
-To run our test input files, run the project as a JUnit test. The test input
-files we used during development can be found in the following
-project directory:\\
+To run our test input files, you can either run the JUnit tests for the project,
+or, more simply, run the command line program and pass in our test files.
+The particular command to run jsrcdiff with our test input files as
+arguments is (executed from the directory containing ``pom.xml''):\\ \\
 
 \begin{lstlisting}[frame=single,breaklines=true,showstringspaces=false]
-src/test/jsrcdiff/
+$ mvn exec:java --quiet -Dexec.args="src/test/jsrcdiff/BasicsWithMethodBody.java src/test/jsrcdiff/BasicsWithMethodBody-diff.java"
 \end{lstlisting}
