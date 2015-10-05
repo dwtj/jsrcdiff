@@ -13,17 +13,18 @@ The differences detected fall into one of six categories:
     iii. Changing the initialization expression.
     iv. Changing a field's modifier (e.g. `private` to `public`).
 
-To build and install the project to the local Maven repository:
+To build and install the project to the local Maven repository, run the following from the directory containing `pom.xml`:
 
 ```{.sh}
 $ mvn clean install
 ```
 
-To run the `Main` class:
+To run the `Main` class on two test `.java` files, run the following from the directory containing `pom.xml`:
 
 ```{.sh}
-mvn exec:java
+mvn exec:java --quiet -Dexec.args="src/test/jsrcdiff/BasicsWithMethodBody.java src/test/jsrcdiff/BasicsWithMethodBody-diff.java"
 ```
+
 
 ## Definitions
 
